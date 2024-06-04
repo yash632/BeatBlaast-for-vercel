@@ -1,6 +1,5 @@
 document.addEventListener('contextmenu',event=>event.preventDefault());document.addEventListener('keydown', event => {if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'J' || event.key === 'C')) || (event.ctrlKey && event.key === 'U')){event.preventDefault();}});
 
-
 //…………………………Variable………………………………
 let media = (window.matchMedia("(max-width: 600px)").matches);
 const gaaneList = document.querySelector('#gaane');
@@ -16,10 +15,33 @@ let card_img1 = document.querySelector('#card_img1');
 let card_img2 = document.querySelector('#card_img2');
 let seeker = document.querySelector(".seeker");
 
-//………………………fatching data
-//…………………fatching data END……………………
-//……………………Variable END…………………………
+//………………………fatching data……………………
+let accessToken;
 
+async function gitToken() {
+try {
+  const response = await fetch('https://localhost:5000/song');
+  if (response.ok) {
+    const dataArray = await response.json();
+    dataArray.forEach(item => {
+      if (item.git) {
+      accessToken = item.git;       
+      }
+    });
+  } 
+  else {
+    console.error('Failed to fetch song data');
+  }
+} catch (error) {
+  console.error('Error fetching song data:', error);
+}
+}
+gitToken();
+
+const owner = 'yash632';
+//…………………fatching data END……………………
+
+//……………………Variable END…………………………
 
 //……………………IMP Functions………………………
 //…………………………Left height…………………………
@@ -169,6 +191,7 @@ function funListItem() {
 
 //…………1……………Fetching API…………………………
 async function fetchFileList() {
+  
   const repo = 'BeatBlast_library';
 
   try {
@@ -344,7 +367,6 @@ function playMp3(mp3File) {
 //…………………………PlayMp3 END……………………………
 
 
-
 //………………1…………Play API……………………………
 async function playFirstSong() {
   try {
@@ -501,7 +523,7 @@ function cardplay(playplay) {
 //library tracklist function end
 
 //…………………Play Fun Call……………………………
-card_img1.addEventListener('click', () => {
+card_img1.addEventListener('click', async () => {
   cardplay(playFirstSong);
 });
 //-----------------------------
@@ -534,6 +556,7 @@ function funFullSongList(fdata) {
 }
 
 async function fetchAllFileList() {
+  await gitToken();
   const repositories = ['BeatBlast_library', 'BeatBlast_library_2', 'BeatBlast_library_warrior', 'BeatBlast_library_trending', 'BeatBlast_library_old'];
 
   for (const repo of repositories) {
