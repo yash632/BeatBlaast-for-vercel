@@ -61,7 +61,7 @@ signupForm.addEventListener('submit', async function(event) {
   let password = document.getElementById('newPassword').value.trim();
 
   try {
-    const response = await fetch('https://beat-blaast-for-vercel-yash-rathore-s-projects.vercel.app/signup', {
+    const response = await fetch('https://beatblaast.vercel.app/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -93,7 +93,7 @@ document.querySelector('.signFail').classList.remove('snone');
 
 async function retrieveReview() {
    try {
-    const response = await fetch('https://beat-blaast-for-vercel-yash-rathore-s-projects.vercel.app/all_reviews'); 
+    const response = await fetch('https://beatblaast.vercel.app/all_reviews'); 
     if (response.ok) {
       const reviews = await response.json();
 
@@ -148,7 +148,7 @@ reviewForm.addEventListener('submit', async function(event){
   let reviewInput = document.getElementById('reviewInput').value.trim();
 
   try {
-    const response = await fetch('https://beat-blaast-for-vercel-yash-rathore-s-projects.vercel.app/submit_review', {
+    const response = await fetch('https://beatblaast.vercel.app/submit_review', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -183,7 +183,7 @@ loginForm.addEventListener("submit", async function(event) {
   logPassword = document.querySelector('#logPassword').value.trim();
 
   try {
-    const response = await fetch('https://beat-blaast-for-vercel-yash-rathore-s-projects.vercel.app/login', {
+    const response = await fetch('https://beatblaast.vercel.app/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
