@@ -219,9 +219,11 @@ nav {
   height: 120vh;
 }
 
-.logFail {
+.logFail, signFail{
   color: red;
   font-size: 12px;
+  position: absoute;
+  z-index: 10;
 }
 
 .reg h1 {
