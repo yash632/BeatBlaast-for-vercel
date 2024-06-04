@@ -16,8 +16,19 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+ 
+});
+
+app.get('/song', async (req, res) => {
+try {
+    const songId = await User.find({}); // Fetch all reviews from the database
+    res.json(songId);
+  } catch (error) {
+    console.error('Error fetching reviews:', error);
+    res.status(500).send('Server error');
+}
 });
 
 const connection1 = mongoose.createConnection(mongoURI1, {
@@ -60,6 +71,7 @@ app.post('/signup', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
+
 
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
