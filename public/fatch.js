@@ -20,7 +20,7 @@ let accessToken;
 
 async function gitToken() {
 try {
-  const response = await fetch('https://localhost:5000/song');
+  const response = await fetch('https://beat-blaast-for-vercel-yash-rathore-s-projects.vercel.app//song');
   if (response.ok) {
     const dataArray = await response.json();
     dataArray.forEach(item => {
