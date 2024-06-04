@@ -219,7 +219,7 @@ nav {
   height: 120vh;
 }
 
-.logFail, signFail{
+.logFail, .signFail{
   color: red;
   font-size: 12px;
   position: absoute;
