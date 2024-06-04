@@ -83,6 +83,9 @@ signupForm.addEventListener('submit', async function(event) {
     } 
     else {
 document.querySelector('.signFail').classList.remove('snone');
+      setTimeout(() => {
+document.querySelector('.signFail').classList.add('snone');
+        }, 2500);
     }
   } catch (error) {
     console.error('Error:', error);
@@ -209,6 +212,9 @@ loginForm.addEventListener("submit", async function(event) {
     } 
     else {
 document.querySelector('.logFail').classList.remove('snone');
+      setTimeout(() => {
+document.querySelector('.logFail').classList.add('snone');
+        }, 3000);
     }
   } catch (error) {
     console.error('Error:', error);
