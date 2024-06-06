@@ -20,7 +20,7 @@ let accessToken;
 
 async function gitToken() {
 try {
-  const response = await fetch('https://beatblaast.vercel.app/song');
+  const response = await fetch(`${webUri}song`);
   if (response.ok) {
     const dataArray = await response.json();
     dataArray.forEach(item => {
@@ -40,8 +40,8 @@ gitToken();
 
 const owner = 'yash632';
 //…………………fatching data END……………………
-
 //……………………Variable END…………………………
+
 
 //……………………IMP Functions………………………
 //…………………………Left height…………………………
@@ -93,12 +93,34 @@ function funSongList(fdata) {
   });
 }
 
+
 function funCurrentSong(dmp3File) {
-  mp3File = dmp3File;
-  const audio = new Audio(mp3File.download_url);
-  audio.play();
-  currentSong = audio; // Update the currentSong variable 
+    mp3File = dmp3File;
+    const audio = new Audio(mp3File.download_url);
+
+audio.addEventListener('error', (e) => {
+        if (index === songList.length - 1) {
+          index = 0;
+        } 
+        else {
+          index++;
+        }
+        currentSong.pause();
+        playMp3(songList[index]);
+        console.error('Error details:', e);
+    });
+
+    audio.play()
+        .catch((error) => {
+            if (error.name === 'NotSupportedError') {
+                console.log(`error to play song`);
+            } else {
+                console.error('Audio playback error:', error);
+            }
+        });
+    currentSong = audio;
 }
+
 //code of time and duration 
 function funTime() {
   currentSong.addEventListener("timeupdate", function() {
@@ -108,11 +130,12 @@ function funTime() {
     document.querySelector('.t2').innerText = formatTime(currentSong.duration);
   });
 }
-
+let seekColor = document.querySelector('.seekBarColor');
 //seekbar move code
 function funSeeker() {
   currentSong.addEventListener("timeupdate", () => {
     seeker.style.left = (currentSong.currentTime / currentSong.duration) * 100 + "%";
+    seekColor.style.width = (currentSong.currentTime / currentSong.duration) * 100 + "%";
   });
 }
 
@@ -122,6 +145,7 @@ function funSeek_bar() {
     let percent = (e.offsetX / e.target.getBoundingClientRect().width) * 100;
     seeker.style.left = percent + "%";
     currentSong.currentTime = (currentSong.duration * percent) / 100;
+    seekColor.style.width = (currentSong.duration * percent) / 100;
   });
 }
 
@@ -131,7 +155,8 @@ function funNextSong() {
     if (currentSong.currentTime === currentSong.duration) {
       if (index === songList.length - 1) {
         index = 0;
-      } else {
+      } 
+      else {
         index++;
       }
       currentSong.pause();
@@ -164,9 +189,9 @@ function funListItem() {
       const fileNameToFind = currentSong.src;
       index = songList.findIndex(song => song.download_url === fileNameToFind);
       if (index !== -1) {
-        console.log(`Index of ${fileNameToFind}: ${index}`);
+        //console.log(`Index of ${fileNameToFind}: ${index}`);
       } else {
-        console.log(`${fileNameToFind} not found in the song list.`);
+//console.log(`${fileNameToFind} not found in the song list.`);
       }
     }
     listItem.addEventListener('click', () => {
@@ -189,9 +214,40 @@ function funListItem() {
 
 //……………List of Function END…………………
 
+//…………………………PlayMp3……………………………
+function playMp3(mp3File) {
+  if (currentSong) {
+    currentSong.pause();
+
+    let previousPlaying = document.querySelector('.darkPlay');
+    if (previousPlaying) {
+      previousPlaying.classList.remove('darkPlay');
+      previousPlaying.lastElementChild.querySelector('img').src = "pause.svg";
+    }
+  }
+
+  funCurrentSong(mp3File);
+  funTime();
+  funSeeker();
+  funSeek_bar();
+  funNextSong();
+  funSongName();
+
+  const fileNameToFind = mp3File.download_url;
+  index = songList.findIndex(song => song.download_url === fileNameToFind);
+  if (index !== -1) {
+    let newPlaying = gaaneList.querySelectorAll('li')[index];
+    if (newPlaying) {
+      newPlaying.classList.add('darkPlay');
+      newPlaying.lastElementChild.querySelector('img').src = "play.svg"; // Change to play icon
+    }
+  }
+}
+//…………………………PlayMp3 END……………………………
+
 //…………1……………Fetching API…………………………
 async function fetchFileList() {
-  
+
   const repo = 'BeatBlast_library';
 
   try {
@@ -334,38 +390,6 @@ async function fetchFileList5() {
   }
 }
 //END of API …5… fetching function 
-
-//…………………………PlayMp3……………………………
-function playMp3(mp3File) {
-  if (currentSong) {
-    currentSong.pause();
-
-    let previousPlaying = document.querySelector('.darkPlay');
-    if (previousPlaying) {
-      previousPlaying.classList.remove('darkPlay');
-      previousPlaying.lastElementChild.querySelector('img').src = "pause.svg";
-    }
-  }
-
-  funCurrentSong(mp3File);
-  funTime();
-  funSeeker();
-  funSeek_bar();
-  funNextSong();
-  funSongName();
-
-  const fileNameToFind = mp3File.download_url;
-  index = songList.findIndex(song => song.download_url === fileNameToFind);
-  if (index !== -1) {
-    let newPlaying = gaaneList.querySelectorAll('li')[index];
-    if (newPlaying) {
-      newPlaying.classList.add('darkPlay');
-      newPlaying.lastElementChild.querySelector('img').src = "play.svg"; // Change to play icon
-    }
-  }
-}
-//…………………………PlayMp3 END……………………………
-
 
 //………………1…………Play API……………………………
 async function playFirstSong() {
