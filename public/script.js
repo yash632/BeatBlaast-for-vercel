@@ -1,5 +1,5 @@
 console.log(`"Hey there, coding maestro! Please refrain from 'borrowing' the code."`);
-const webUri = "https://6890767b-a76e-4355-89f1-5af7b1d594dc-00-eqibm61x1t5b.sisko.replit.dev/"
+const webUri = "https://beatblaast.vercel.app/";
 
 //………………Customised Refresh………………
 window.addEventListener('beforeunload', function(event) {
