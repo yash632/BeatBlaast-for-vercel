@@ -1,4 +1,5 @@
 console.log(`"Hey there, coding maestro! Please refrain from 'borrowing' the code."`);
+const webUri = "https://6890767b-a76e-4355-89f1-5af7b1d594dc-00-eqibm61x1t5b.sisko.replit.dev/"
 
 //………………Customised Refresh………………
 window.addEventListener('beforeunload', function(event) {
@@ -39,7 +40,7 @@ let localPhone = localStorage.getItem("mobileNo");
 let localIdFlag = localStorage.getItem("idFlag");
 
 if (localIdFlag == 1) {
-  console.log(`inside flag`);
+  
   if (localName && localEmail && localPassword && localPhone) {
     details = `<br>Name: ${localName}<br>Mobile No: ${localPhone}<br>Email: ${localEmail}`;
 
@@ -61,7 +62,7 @@ signupForm.addEventListener('submit', async function(event) {
   let password = document.getElementById('newPassword').value.trim();
 
   try {
-    const response = await fetch('https://beatblaast.vercel.app/signup', {
+    const response = await fetch(`${webUri}signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -85,7 +86,7 @@ signupForm.addEventListener('submit', async function(event) {
 document.querySelector('.signFail').classList.remove('snone');
       setTimeout(() => {
 document.querySelector('.signFail').classList.add('snone');
-        }, 2500);
+        }, 3000);
     }
   } catch (error) {
     console.error('Error:', error);
@@ -96,15 +97,15 @@ document.querySelector('.signFail').classList.add('snone');
 
 async function retrieveReview() {
    try {
-    const response = await fetch('https://beatblaast.vercel.app/all_reviews'); 
+    const response = await fetch(`${webUri}all_reviews`); 
     if (response.ok) {
       const reviews = await response.json();
 
     let htmlReviewData = document.querySelector('.reviewData');
 htmlReviewData.innerHTML = '';
-      
+
 for (let reviewData of reviews) {
-  
+
     const reviewElement = document.createElement('li');
     reviewElement.classList.add('reviewData_li');
     reviewElement.innerHTML = `<span>${reviewData.nameForReview}: </span><span>${reviewData.reviewInput}</span>`;
@@ -119,7 +120,7 @@ for (let reviewData of reviews) {
     console.error('Error fetching reviews:', error);
   } 
  }
- 
+
 
 let reviewTab = document.querySelector('.review');
 reviewTab.addEventListener('click', async function() {
@@ -135,10 +136,10 @@ reviewTab.addEventListener('click', async function() {
 
 
 if(!(reviewTab.classList.contains('reviewAdded'))){
-  
+
  retrieveReview();
   reviewTab.classList.add('reviewAdded');
-  
+
 }  
 });
 
@@ -151,7 +152,7 @@ reviewForm.addEventListener('submit', async function(event){
   let reviewInput = document.getElementById('reviewInput').value.trim();
 
   try {
-    const response = await fetch('https://beatblaast.vercel.app/submit_review', {
+    const response = await fetch(`${webUri}submit_review`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -186,7 +187,7 @@ loginForm.addEventListener("submit", async function(event) {
   logPassword = document.querySelector('#logPassword').value.trim();
 
   try {
-    const response = await fetch('https://beatblaast.vercel.app/login', {
+    const response = await fetch(`${webUri}login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -265,8 +266,6 @@ document.querySelector('.infotab').addEventListener('click', function() {
   });
   document.querySelector('.info_data').classList.remove('none');
   document.querySelector('.info_data').innerHTML = `<img src="back.svg" class="info_back invert">${details}`;
-
-  console.log(details);
   document.querySelector('.info_back').addEventListener('click', function() {
     document.querySelector('.info_data').classList.add('none');
 
@@ -320,7 +319,7 @@ document.querySelector('.logOut').addEventListener('click', function() {
   location.reload();
   idFlag=0;
   localStorage.setItem("idFlag", idFlag);
-  
+
 });
 
 document.querySelector('.reviewBack').addEventListener('click', function() {
