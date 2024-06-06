@@ -660,12 +660,21 @@ nav {
 .seeker {
   position: absolute;
   left: 0;
-  width: 15px;
-  height: 15px;
-  background-color: #ffffff;
+  width: 12px;
+  height: 12px;
+  background-color: #ff0000;
   border-radius: 100px;
   cursor: pointer;
   transition: all 0.2s;
+  box-sizing: border-box;
+  border: 4px solid #ffff;
+}
+
+.seekBarColor{
+  background-color: red;
+  width: 10px;
+  height: 2.2px;
+  margin-left: 1px;
 }
 
 .t1 {
@@ -827,7 +836,8 @@ nav {
     height: 33px;
     width: 95%;
     border-radius: 10px;
-    padding-left: 10px;
+    padding-left: 15px;
+    
   }
 
   #searchButton {
@@ -835,7 +845,7 @@ nav {
   }
 }
 
-.searchPannel input::placeholder {
+searchPannel input::placeholder {
   padding-left: 10px;
 }
 
@@ -853,90 +863,6 @@ nav {
 .darkPlay{
   background-color: rgb(4, 0, 255, 0.5)!important;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .reviewCont{
   background: linear-gradient(to top, #ffffff, #290066);
