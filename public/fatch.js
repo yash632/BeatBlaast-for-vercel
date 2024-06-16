@@ -6,6 +6,8 @@ const gaaneList = document.querySelector('#gaane');
 const searchGaaneList = document.querySelector('#searchGaane');
 let songList = [];
 let fullSongList = [];
+let songTitle;
+let mp3File;
 let currentSong;
 let pause = document.querySelector('.pause');
 let play = document.querySelector('.play');
@@ -166,9 +168,15 @@ function funNextSong() {
   });
 }
 
-//show song name above crt dtls
+//show song name above ctrl dtls
 function funSongName() {
   songName.textContent = mp3File.name.replaceAll('_', ' ').replaceAll('%', '').replaceAll('.mp3', '');
+
+ songTitle = currentSong.paused ? "Please Play any Song" :
+    mp3File.name.replaceAll('_', ' ').replaceAll('%', '').replace('.mp3', '');
+  console.log(songTitle)
+MediaMetadataCall();
+  
 }
 
 //display song list
@@ -215,6 +223,7 @@ function funListItem() {
 //……………List of Function END…………………
 
 //…………………………PlayMp3……………………………
+
 function playMp3(mp3File) {
   if (currentSong) {
     currentSong.pause();
@@ -497,6 +506,7 @@ pause.addEventListener('click', () => {
     play.classList.remove('none');
   }
 });
+
 //…………………play pause key END…………………
 
 document.querySelector('.next').addEventListener("click", () => {
@@ -653,8 +663,6 @@ searchbtn.addEventListener("click", function() {
   }
 });
 
-
-
 async function songSearch(query) {
 
   if (songList.length > 0) {
@@ -680,3 +688,50 @@ async function songSearch(query) {
   }
 }
 //………………………Search END………………………………
+
+//……………………Notification…………………………
+function MediaMetadataCall(){
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: songTitle,
+        artist: 'BeatBlaast- Web Player: Music for everyone',
+        album: 'BeatBlaast- Web Player: Music for everyone',
+        artwork: [
+          { src: 'favicon.ico', sizes: '512x512', type: 'image/jpg'},
+          { src: 'favicon.ico', sizes: '512x512', type: 'image/jpg'},
+          
+        ]
+      });
+  navigator.mediaSession.setActionHandler('play', function() {
+    // Play action logic
+    currentSong.play();
+  });
+  navigator.mediaSession.setActionHandler('pause', function() {
+    // Pause action logic
+    currentSong.pause();
+  });
+  navigator.mediaSession.setActionHandler('stop', function() {
+    // Stop action logic
+    currentSong.pause();
+    currentSong.currentTime = 0;
+  });
+  navigator.mediaSession.setActionHandler('seekbackward', function(event) {
+    // Seek backward logic
+    currentSong.currentTime = Math.max(currentSong.currentTime - (event.seekOffset || 10), 0);
+  });
+  navigator.mediaSession.setActionHandler('seekforward', function(event) {
+
+    currentSong.currentTime = Math.min(currentSong.currentTime + (event.seekOffset || 10), currentSong.duration);
+  });
+  navigator.mediaSession.setActionHandler('previoustrack', function() {
+  document.querySelector('.pre').click();
+  });
+  navigator.mediaSession.setActionHandler('nexttrack', function() {
+      document.querySelector('.next').click();
+    console.log(mp3File.name.replaceAll('_', ' ').replaceAll('%', '').replace('.mp3', ''));
+   });
+  }
+ }
+MediaMetadataCall();
+//……………………Notification END……………………
+
