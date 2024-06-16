@@ -1,5 +1,5 @@
 console.log(`"Hey there, coding maestro! Please refrain from 'borrowing' the code."`);
-const webUri = "https://beatblaast.vercel.app/";
+const webUri = "https://beatblaast.vercel.app/"
 
 //………………Customised Refresh………………
 window.addEventListener('beforeunload', function(event) {
@@ -124,6 +124,13 @@ for (let reviewData of reviews) {
 
 let reviewTab = document.querySelector('.review');
 reviewTab.addEventListener('click', async function() {
+
+if(document.querySelector('.searchListCont').classList.contains('searchNone')){
+  
+}else{
+//document.querySelector('.searchListCont').classList.add('searchNone');
+document.querySelector('.searchBack').click();
+}
   document.querySelector('.reviewCont').classList.remove('searchNone')
   document.querySelector('.right_head').classList.add('none');
   document.querySelector('.control_details').classList.add('none');
@@ -134,13 +141,11 @@ reviewTab.addEventListener('click', async function() {
   }
     left.classList.add('left');
 
-
 if(!(reviewTab.classList.contains('reviewAdded'))){
 
  retrieveReview();
-  reviewTab.classList.add('reviewAdded');
-
-}  
+  reviewTab.classList.add('reviewAdded'); 
+} 
 });
 
 //……………………………Review……………………………………
@@ -287,20 +292,16 @@ document.querySelector('.back_btn').addEventListener('click', function() {
   document.querySelector('.container').classList.add('none');
 });
 document.querySelector('.search_tab').addEventListener('click', function() {
+
+if(document.querySelector('.reviewCont').classList.contains('searchNone')){
+  
+}
+else{
+//document.querySelector('.reviewCont').classList.add('searchNone');
+  document.querySelector('.reviewBack').click();
+}
   document.querySelector('.searchListCont').classList.remove('searchNone')
   document.querySelector('.right_head').classList.add('none');
-  document.querySelector('.right_cont').classList.add('none');
-
-  if (left.classList.contains('leftactive')) {
-    left.classList.remove('leftactive');
-    left.classList.add('left');
-  }
-});
-
-document.querySelector('.review').addEventListener('click', function() {
-  document.querySelector('.reviewCont').classList.remove('searchNone')
-  document.querySelector('.right_head').classList.add('none');
-  document.querySelector('.control_details').classList.add('none');
   document.querySelector('.right_cont').classList.add('none');
 
   if (left.classList.contains('leftactive')) {
