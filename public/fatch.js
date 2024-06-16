@@ -239,10 +239,22 @@ function playMp3(mp3File) {
     let newPlaying = gaaneList.querySelectorAll('li')[index];
     if (newPlaying) {
       newPlaying.classList.add('darkPlay');
-      newPlaying.lastElementChild.querySelector('img').src = "play.svg"; // Change to play icon
+      newPlaying.lastElementChild.querySelector('img').src = "play.svg"; 
     }
+    currentSong.addEventListener('pause', () => {
+      newPlaying.lastElementChild.querySelector('img').src = "pause.svg";
+  pause.classList.remove('none');
+  play.classList.add('none');
+    });
+
+currentSong.addEventListener('play', () => {
+      newPlaying.lastElementChild.querySelector('img').src = "play.svg";
+  pause.classList.add('none');
+  play.classList.remove('none');
+});
   }
 }
+
 //…………………………PlayMp3 END……………………………
 
 //…………1……………Fetching API…………………………
