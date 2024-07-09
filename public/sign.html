@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width">
+   <title>Sign-up: BeatBlaast</title>
+   <link href="style.css" rel="stylesheet">
+   <link href="utilityClasses.css" rel="stylesheet">
+   <link href="respo.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<form action="submit_registration" method="POST" id="formSign">
+      <div class="reg">
+         <div class="sign_filter"></div>
+         <h1>WELCOME TO BEATBLAST</h1>
+         <h2>YOUR OWN MUSIC PLAYER</h2><input type="text" id="fullName" name="fullName" required
+            placeholder="Full Name""><input type=" tel" id="mobileNo" name="mobileNo" pattern="[0-9]{10}" required
+            placeholder="Mobile Number""><input type=" email" id="email" name="email" required
+            placeholder="Email"><input type="password" id="newPassword" name="newPassword" required
+            placeholder="New Password">
+         <input type="password" id="reenterPassword" name="reenterPassword" required
+            placeholder="Re-enter New Password">
+         <h4 class="signFail snone">ERROR! User May be Already Exists</h4>
+         <input id="submit" type="submit" value="Sign-Up">
+      </div>
+   </form>
+<script src="devtool.js"></script>
+<script src="ud.js"></script>
+<script src="sign.js"></script>
+</body>
+
+</html>
+

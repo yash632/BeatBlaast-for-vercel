@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width">
+   <title>Log-in: BeatBlaast</title>
+   <link href="style.css" rel="stylesheet">
+   <link href="utilityClasses.css" rel="stylesheet">
+   <link href="respo.css" rel="stylesheet">
+
+</head>
+
+<body>
+<form action="submit_login" method="POST" id="formLog">
+      <div class="reg">
+         <div class="sign_filter"></div>
+         <h1>WELCOME TO BEATBLAST</h1>
+         <h2>YOUR OWN MUSIC PLAYER</h2><input type=" email" id="logEmail" name="email" required
+            placeholder="Enter your Email">
+         <input type="password" id="logPassword" name="logPassword" required
+            placeholder="Enter your Password">
+         <h4 class="logFail snone">Please Enter Correct Email or Password</h4>
+         <input id="submit" type="submit" value="Log in">
+      </div>
+   </form>
+<script src="devtool.js"></script>
+<script src="ud.js"></script>
+<script src="log.js"></script>
+   
+</body>
+
+</html>
