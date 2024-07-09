@@ -36,7 +36,7 @@ if (localName && localEmail && localPassword && localPhone) {
 
 async function tryForLog(logEmail,logPassword) {
    try {
-     const response = await fetch(`${webUri}login`, {
+     const response = await fetch(`${webUri}login.html/login`, {
        method: 'POST',
        headers: {
          'Content-Type': 'application/json',
