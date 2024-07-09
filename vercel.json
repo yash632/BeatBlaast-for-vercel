@@ -13,11 +13,4 @@
 ]
 }
 
-{
-  "rewrites": [
-    {
-      "source": "/signup",
-      "destination": "/public/sign.html.html"
-    }
-  ]
-}
+
