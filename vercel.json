@@ -14,11 +14,3 @@
 }
 
 
-{
-  "rewrites": [
-    {
-      "source": "/log.html",
-      "destination": "/login"
-    }
-  ]
-}
