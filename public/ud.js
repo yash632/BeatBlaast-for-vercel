@@ -1,5 +1,4 @@
 let details;
-const webUri = "https://beatblaast.vercel.app/";
 
 let localName = localStorage.getItem("fullName");
 
