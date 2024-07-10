@@ -17,6 +17,7 @@ if (localName && localEmail && localPassword && localPhone) {
 
 
 
+  
 
 
 
@@ -68,3 +69,5 @@ logFlag = 1;
      console.error('Error:', error);
    }
 }
+window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+
