@@ -5,6 +5,10 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 require('dotenv').config();
+const { inject } = require('@vercel/analytics');
+
+inject();
+
 
 const mongoURI1 = process.env.MONGO_URI;
 const mongoURI2 = process.env.MONGO_URI2;
